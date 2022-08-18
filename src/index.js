@@ -31,7 +31,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MySQLStore(database)
-}))
+}));
 app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
     app.locals.user = req.user;
     
     next();
-})
+});
 
 // Routes
 app.use(require('./routes'));
