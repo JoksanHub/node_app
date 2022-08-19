@@ -30,7 +30,7 @@ router.get('/profile', isLoggedIn, (req,res) => {
     res.render('profile');
 });
 
-router.post('/logout', isLoggedIn, (req,res,next) => {
+router.get('/logout', isLoggedIn, (req,res,next) => {
     
     req.logOut(function(err) {
         if(err) { return next(err); }
