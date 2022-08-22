@@ -1,0 +1,18 @@
+*, html {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    text-rendering: optimizeLegibility;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+@import 'elements.scss',
+        'components.scss',
+        'layout',
+        './2_components/modal_inputs';
+
+body {
+    margin: 0;
+    width: 100%;
+}

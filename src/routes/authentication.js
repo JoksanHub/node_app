@@ -4,37 +4,41 @@ const router = express.Router();
 const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
+// REGISTRO
 router.get('/signup', isNotLoggedIn, (req,res) => {
-    res.render('auth/signup');
+    res.redirect('/#empezar');
 });
 
 router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
-    failureRedirect: '/signup',
+    failureRedirect: '/#empezar',
     failureFlash: true
 }));
 
-router.get('/signin', isNotLoggedIn, (req,res) => {
-    res.render('auth/signin');
+// INICIAR SESIÓN
+router.get('/login', isNotLoggedIn, (req,res) => {
+    res.render('auth/login');
 });
 
-router.post('/signin', isNotLoggedIn, (req, res, next) => {
-    passport.authenticate('local.signin', {
+router.post('/login', isNotLoggedIn, (req, res, next) => {
+    passport.authenticate('local.login', {
         successRedirect: '/profile',
-        failureRedirect: '/signin',
+        failureRedirect: '/#inicio-sesion',
         failureFlash: true
     })(req,res,next);
 });
 
+// PROFILE
 router.get('/profile', isLoggedIn, (req,res) => {
     res.render('profile');
 });
 
+// LOGOUT
 router.get('/logout', isLoggedIn, (req,res,next) => {
     
     req.logOut(function(err) {
         if(err) { return next(err); }
-        res.redirect('/signin');
+        res.redirect('/#inicio-sesion');
     });
     
 });
